@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   Card: HTMLElement;
   /**當前選擇的那個牌(在陣列中的index) */
   index = 0;
-  /**剩餘幾步 */
+  /**輪轉幾次 */
   times = 0;
   /**每一張牌的圖片連結 */
   itemImageUrl = "../assets/picture/back.png";
@@ -44,19 +44,17 @@ export class AppComponent implements OnInit {
 
   /**亂數放置卡牌 */
   SetupRandomCards() {
-    //
-    for (let i = 0; i < this.Cards.length; i++) {
+    this.Cards.forEach((element, index) => {
       let url =
         this.PlayCards[Math.floor(Math.random() * this.PlayCards.length)];
-      this.Cards[i].setAttribute('src', "../assets/picture/" + url);//擺放圖片位置
-      this.Cards[i].setAttribute('data', url);//設定圖片名稱為 屬性
-      console.log(typeof this.Cards[i]);
-    }
+      element.setAttribute('src', "../assets/picture/" + url);//擺放圖片位置
+      element.setAttribute('data', url);//設定圖片名稱為 屬性
+    });
   }
 
   ButtonStart() {
     this.itemImageUrl = "../assets/picture/back.png";
-    this.times = 27; //輪轉幾次
+    this.times = 50;
     this.Cards[this.index].className = "imgs"; //改變Cards的class
 
     this.start();
